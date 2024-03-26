@@ -217,8 +217,13 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
 
+import { useGlobalStore } from "@/store/global.js"
+
+
 const route = useRoute();
 const router = useRouter();
+
+const globalStore = useGlobalStore();
 
 watch(route, () => {
 	showThis();
@@ -284,27 +289,23 @@ const onLayoutResize = () => {
 }
 
 
-
-
 const store = useStore();
-console.log(store);
 const ismobile = computed(() => {
-
-	return store.state.global.layout
+	return globalStore.ismobile
 })
 
 
 const layout = computed(() => {
-	return store.state.global.layout
+	return globalStore.layout
 })
 
 const layoutTags = computed(() => {
-	return store.state.global.layoutTags;
+	return globalStore.layoutTags;
 })
 
 
 const menuIsCollapse = computed(() => {
-	return store.state.global.menuIsCollapse || true
+	return globalStore.menuIsCollapse
 })
 
 
