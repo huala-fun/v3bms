@@ -30,7 +30,7 @@ const routes_404 = {
 let routes_404_r = () => { }
 
 const router = createRouter({
-	history:  createWebHistory(),
+	history: createWebHistory(),
 	routes: routes
 })
 
@@ -41,13 +41,10 @@ document.title = config.APP_NAME
 var isGetRouter = false;
 
 router.beforeEach(async (to, from, next) => {
-
 	NProgress.start()
 	//动态标题
 	document.title = to.meta.title ? `${to.meta.title} - ${config.APP_NAME}` : `${config.APP_NAME}`
-
-	let token = tool.cookie.get("TOKEN");
-
+	const token = tool.cookie.get("TOKEN");
 	if (to.path === "/login") {
 		//删除路由(替换当前layout路由)
 		router.addRoute(routes[0])
@@ -69,6 +66,7 @@ router.beforeEach(async (to, from, next) => {
 		});
 		return false;
 	}
+	
 
 	//整页路由处理
 	if (to.meta.fullpage) {
@@ -77,6 +75,7 @@ router.beforeEach(async (to, from, next) => {
 	//加载动态/静态路由
 	if (!isGetRouter) {
 		let apiMenu = tool.data.get("MENU") || []
+		console.log(apiMenu);
 		let userInfo = tool.data.get("USER_INFO")
 		let userMenu = treeFilter(userRoutes, node => {
 			return node.meta.role ? node.meta.role.filter(item => userInfo.role.indexOf(item) > -1).length > 0 : true
@@ -85,7 +84,7 @@ router.beforeEach(async (to, from, next) => {
 		var menuRouter = filterAsyncRouter(menu)
 		menuRouter = flatAsyncRoutes(menuRouter)
 		menuRouter.forEach(item => {
-			router.addRoute("layout", item)
+			router.addRoute("sysLayout", item)
 		})
 		routes_404_r = router.addRoute(routes_404)
 		if (to.matched.length == 0) {
@@ -93,6 +92,7 @@ router.beforeEach(async (to, from, next) => {
 		}
 		isGetRouter = true;
 	}
+	console.log(router);
 	beforeEach(to, from)
 	next();
 });
@@ -124,33 +124,23 @@ router.sc_getMenu = () => {
 //转换
 function filterAsyncRouter(routerMap) {
 	const accessedRouters = []
-	routerMap.forEach(item => {
-		item.meta = item.meta ? item.meta : {};
+	routerMap.forEach(({ meta = {}, path, name, redirect, children, component }) => {
 		//处理外部链接特殊路由
-		if (item.meta.type == 'iframe') {
-			item.meta.url = item.path;
-			item.path = `/i/${item.name}`;
+		if (meta.type == 'iframe') {
+			meta.url = path;
+			path = `/i/${name}`;
 		}
 		//MAP转路由对象
-		var route = {
-			path: item.path,
-			name: item.name,
-			meta: item.meta,
-			redirect: item.redirect,
-			children: item.children ? filterAsyncRouter(item.children) : null,
-			component: loadComponent(item.component)
-		}
-		accessedRouters.push(route)
+		accessedRouters.push({
+			path,
+			name,
+			meta,
+			redirect,
+			children: children ? filterAsyncRouter(children) : null,
+			component: component ? views[component] : () => import(`@/layout/other/empty.vue`)
+		})
 	})
 	return accessedRouters
-}
-function loadComponent(component) {
-	if (component) {
-		return views[component];
-	} else {
-		return () => import(`@/layout/other/empty.vue`)
-	}
-
 }
 
 //路由扁平化

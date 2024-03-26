@@ -374,17 +374,17 @@
                 ]
             },
             {
-                "name": "template",
-                "path": "/template",
+                "name": "layout",
+                "path": "/layout",
                 "meta": {
-                    "title": "模板",
+                    "title": "布局",
                     "icon": "el-icon-files",
                     "type": "menu"
                 },
                 "children": [
                     {
-                        "path": "/template/layout",
-                        "name": "layoutTemplate",
+                        "path": "/layout/layout",
+                        "name": "layoutlayout",
                         "meta": {
                             "title": "布局",
                             "icon": "el-icon-grid",
@@ -392,105 +392,105 @@
                         },
                         "children": [
                             {
-                                "path": "/template/layout/blank",
+                                "path": "/layout/layout/blank",
                                 "name": "blank",
                                 "meta": {
-                                    "title": "空白模板",
+                                    "title": "空白布局",
                                     "type": "menu"
                                 },
-                                "component": "template/layout/blank"
+                                "component": "layout/layout/blank"
                             },
                             {
-                                "path": "/template/layout/layoutTCB",
+                                "path": "/layout/layout/layoutTCB",
                                 "name": "layoutTCB",
                                 "meta": {
                                     "title": "上中下布局",
                                     "type": "menu"
                                 },
-                                "component": "template/layout/layoutTCB"
+                                "component": "layout/layout/layoutTCB"
                             },
                             {
-                                "path": "/template/layout/layoutLCR",
+                                "path": "/layout/layout/layoutLCR",
                                 "name": "layoutLCR",
                                 "meta": {
                                     "title": "左中右布局",
                                     "type": "menu"
                                 },
-                                "component": "template/layout/layoutLCR"
+                                "component": "layout/layout/layoutLCR"
                             }
                         ]
                     },
                     {
-                        "path": "/template/list",
+                        "path": "/layout/list",
                         "name": "list",
                         "meta": {
-                            "title": "列表",
+                            "title": "列表布局",
                             "icon": "el-icon-document",
                             "type": "menu"
                         },
                         "children": [
                             {
-                                "path": "/template/list/crud",
+                                "path": "/layout/list/crud",
                                 "name": "listCrud",
                                 "meta": {
                                     "title": "CRUD",
                                     "type": "menu"
                                 },
-                                "component": "template/list/crud/index",
+                                "component": "layout/list/crud/index",
                                 "children": [
                                     {
-                                        "path": "/template/list/crud/detail/:id?",
+                                        "path": "/layout/list/crud/detail/:id?",
                                         "name": "listCrud-detail",
                                         "meta": {
                                             "title": "新增/编辑",
                                             "hidden": true,
-                                            "active": "/template/list/crud",
+                                            "active": "/layout/list/crud",
                                             "type": "menu"
                                         },
-                                        "component": "template/list/crud/detail"
+                                        "component": "layout/list/crud/detail"
                                     }
                                 ]
                             },
                             {
-                                "path": "/template/list/tree",
+                                "path": "/layout/list/tree",
                                 "name": "listTree",
                                 "meta": {
                                     "title": "左树右表",
                                     "type": "menu"
                                 },
-                                "component": "template/list/tree"
+                                "component": "layout/list/tree"
                             },
                             {
-                                "path": "/template/list/tab",
+                                "path": "/layout/list/tab",
                                 "name": "listTab",
                                 "meta": {
                                     "title": "分类表格",
                                     "type": "menu"
                                 },
-                                "component": "template/list/tab"
+                                "component": "layout/list/tab"
                             },
                             {
-                                "path": "/template/list/son",
+                                "path": "/layout/list/son",
                                 "name": "listSon",
                                 "meta": {
                                     "title": "子母表",
                                     "type": "menu"
                                 },
-                                "component": "template/list/son"
+                                "component": "layout/list/son"
                             },
                             {
-                                "path": "/template/list/widthlist",
+                                "path": "/layout/list/widthlist",
                                 "name": "widthlist",
                                 "meta": {
                                     "title": "定宽列表",
                                     "type": "menu"
                                 },
-                                "component": "template/list/width"
+                                "component": "layout/list/width"
                             }
                         ]
                     },
                     {
-                        "path": "/template/other",
+                        "path": "/layout/other",
                         "name": "other",
                         "meta": {
                             "title": "其他",
@@ -499,13 +499,13 @@
                         },
                         "children": [
                             {
-                                "path": "/template/other/stepform",
+                                "path": "/layout/other/stepform",
                                 "name": "stepform",
                                 "meta": {
                                     "title": "分步表单",
                                     "type": "menu"
                                 },
-                                "component": "template/other/stepform"
+                                "component": "layout/other/stepform"
                             }
                         ]
                     }
@@ -627,10 +627,10 @@
                                 }
                             },
                             {
-                                "path": "https://lolicode.gitee.io/scui-doc",
-                                "name": "scuidoc",
+                                "path": "https://lolicode.gitee.io/V3BMS-doc",
+                                "name": "V3BMSdoc",
                                 "meta": {
-                                    "title": "SCUI文档",
+                                    "title": "V3BMS文档",
                                     "type": "iframe"
                                 }
                             }

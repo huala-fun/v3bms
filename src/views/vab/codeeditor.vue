@@ -40,7 +40,7 @@
 			return {
 				json:
 `{
-	"name": "SCUI",
+	"name": "V3BMS",
 	"menu": [
 		{
 			"title": "VUE 3",

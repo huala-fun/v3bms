@@ -3,7 +3,7 @@ import config from "@/config"
 //系统路由
 const routes = [
 	{
-		name: "layout",
+		name: "sysLayout",
 		path: "/",
 		component: () => import('@/layout/index.vue'),
 		redirect: config.DASHBOARD_URL || '/dashboard',

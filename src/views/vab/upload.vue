@@ -78,14 +78,14 @@
 				fileurlArr: [
 					{
 						name: '销售合同模板.xlsx',
-						url: 'http://www.scuiadmin.com/files/220000198611262243.xlsx'
+						url: 'http://www.V3BMSadmin.com/files/220000198611262243.xlsx'
 					},
 					{
 						name: '企业员工联系方式.xlsx',
-						url: 'http://www.scuiadmin.com/files/350000201004261875.xlsx',
+						url: 'http://www.V3BMSadmin.com/files/350000201004261875.xlsx',
 					}
 				],
-				fileurl: "http://www.scuiadmin.com/files/220000198611262243.xlsx,http://www.scuiadmin.com/files/350000201004261875.xlsx",
+				fileurl: "http://www.V3BMSadmin.com/files/220000198611262243.xlsx,http://www.V3BMSadmin.com/files/350000201004261875.xlsx",
 				fileurl2: "/imgauth_banner.jpg,img/avatar3.gif",
 				fileurl3: "/imgauth_banner.jpg",
 				fileurl4: "",

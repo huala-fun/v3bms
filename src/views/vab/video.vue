@@ -41,9 +41,9 @@
 		},
 		data() {
 			return {
-				playUrl: "https://fastly.jsdelivr.net/gh/scuiadmin/CDN/video/scui-player-demo-720.mp4",
+				playUrl: "https://fastly.jsdelivr.net/gh/V3BMSadmin/CDN/video/V3BMS-player-demo-720.mp4",
 				options: {
-					poster: "https://fastly.jsdelivr.net/gh/scuiadmin/CDN/video/scui-player-demo-1080_Moment.jpg",
+					poster: "https://fastly.jsdelivr.net/gh/V3BMSadmin/CDN/video/V3BMS-player-demo-1080_Moment.jpg",
 					pip: true
 				},
 				liveUrl: "http://local.live.jxtvcn.com.cn/live-jxtv/tv_jxtv1.m3u8",

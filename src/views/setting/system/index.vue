@@ -106,11 +106,11 @@
 		data() {
 			return {
 				sys: {
-					name: "SCUI",
+					name: "V3BMS",
 					logoUrl: "",
 					login: true,
 					passwordRules: "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$",
-					copyright: "@SCUI"
+					copyright: "@V3BMS"
 				},
 				msg: {
 					open: true,
@@ -120,7 +120,7 @@
 				setting: [
 					{
 						key: "file_serve",
-						value: "https://file.scui.com",
+						value: "https://file.V3BMS.com",
 						category: "url",
 						title: "文件服务器地址"
 					},

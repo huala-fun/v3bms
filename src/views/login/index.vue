@@ -2,7 +2,7 @@
 	<div class="login_bg">
 		<div class="login_adv" style="background-image: url(img/auth_banner.jpg);">
 			<div class="login_adv__title">
-				<h2>SCUI</h2>
+				<h2>V3BMS</h2>
 				<h4>{{ $t('login.slogan') }}</h4>
 				<p>{{ $t('login.describe') }}</p>
 				<div>
@@ -136,7 +136,7 @@
 			},
 			wechatLogin(){
 				this.showWechatLogin = true
-				this.WechatLoginCode = "SCUI-823677237287236-" + new Date().getTime()
+				this.WechatLoginCode = "V3BMS-823677237287236-" + new Date().getTime()
 				this.isWechatLoginResult = false
 				setTimeout(()=>{
 					this.isWechatLoginResult = true
