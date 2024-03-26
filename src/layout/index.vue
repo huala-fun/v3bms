@@ -35,7 +35,7 @@
 						</el-menu>
 					</el-scrollbar>
 				</div>
-				<div class="adminui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
+				<div class="adminui-side-bottom" @click="store.commit('TOGGLE_menuIsCollapse')">
 					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
 				</div>
 			</div>
@@ -45,8 +45,8 @@
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
 					<router-view v-slot="{ Component }">
-						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
-							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
+						<keep-alive :include="store.state.keepAlive.keepLiveRoute">
+							<component :is="Component" :key="route.fullPath" v-if="store.state.keepAlive.routeShow" />
 						</keep-alive>
 					</router-view>
 					<iframe-view></iframe-view>
@@ -78,7 +78,7 @@
 						</el-menu>
 					</el-scrollbar>
 				</div>
-				<div class="adminui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
+				<div class="adminui-side-bottom" @click="store.commit('TOGGLE_menuIsCollapse')">
 					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
 				</div>
 			</div>
@@ -88,8 +88,8 @@
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
 					<router-view v-slot="{ Component }">
-						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
-							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
+						<keep-alive :include="store.state.keepAlive.keepLiveRoute">
+							<component :is="Component" :key="route.fullPath" v-if="store.state.keepAlive.routeShow" />
 						</keep-alive>
 					</router-view>
 					<iframe-view></iframe-view>
@@ -123,8 +123,8 @@
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
 					<router-view v-slot="{ Component }">
-						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
-							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
+						<keep-alive :include="store.state.keepAlive.keepLiveRoute">
+							<component :is="Component" :key="route.fullPath" v-if="store.state.keepAlive.routeShow" />
 						</keep-alive>
 					</router-view>
 					<iframe-view></iframe-view>
@@ -169,7 +169,7 @@
 						</el-menu>
 					</el-scrollbar>
 				</div>
-				<div class="adminui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
+				<div class="adminui-side-bottom" @click="store.commit('TOGGLE_menuIsCollapse')">
 					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
 				</div>
 			</div>
@@ -181,8 +181,8 @@
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
 					<router-view v-slot="{ Component }">
-						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
-							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
+						<keep-alive :include="store.state.keepAlive.keepLiveRoute">
+							<component :is="Component" :key="route.fullPath" v-if="store.state.keepAlive.routeShow" />
 						</keep-alive>
 					</router-view>
 					<iframe-view></iframe-view>
@@ -202,7 +202,7 @@
 	<auto-exit></auto-exit>
 </template>
 
-<script>
+<script setup>
 import SideM from './components/sideM.vue';
 import Topbar from './components/topbar.vue';
 import Tags from './components/tags.vue';
@@ -212,184 +212,114 @@ import setting from './components/setting.vue';
 import iframeView from './components/iframeView.vue';
 import autoExit from './other/autoExit.js';
 import { useRouter, useRoute } from 'vue-router'
-import { nextTick, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 import { useStore } from 'vuex';
-export default {
-	name: 'index',
-	components: {
-		SideM,
-		Topbar,
-		Tags,
-		NavMenu,
-		userbar,
-		setting,
-		iframeView,
-		autoExit
-	},
-	data() {
-		return {
-			settingDialog: false,
-			menu: [],
-			nextMenu: [],
-			pmenu: {},
-			active: ''
+
+
+const route = useRoute();
+const router = useRouter();
+
+watch(route, () => {
+	showThis();
+})
+
+const pmenu = ref({
+	path: '',
+	children: [],
+	meta: {
+		title: ''
+	}
+});
+const nextMenu = ref([]);
+const active = ref('');
+//路由监听高亮
+const showThis = () => {
+	pmenu.value = route.meta.breadcrumb ? route.meta.breadcrumb[0] : {}
+	nextMenu.value = filterUrl(pmenu.value.children);
+	nextTick(() => {
+		active.value = route.meta.active || route.fullPath;
+	})
+}
+const filterUrl = (map) => {
+	const newMap = [];
+	map && map.forEach(item => {
+		item.meta = item.meta ? item.meta : {};
+		//处理隐藏
+		if (item.meta.hidden || item.meta.type == "button") {
+			return false
 		}
-	},
-	computed: {
-		ismobile() {
-			return this.$store.state.global.ismobile
-		},
-		layout() {
-			return this.$store.state.global.layout
-		},
-		layoutTags() {
-			return this.$store.state.global.layoutTags
-		},
-		menuIsCollapse() {
-			return this.$store.state.global.menuIsCollapse
+		//处理http
+		if (item.meta.type == 'iframe') {
+			item.path = `/i/${item.name}`;
 		}
-	},
-	created() {
-		this.onLayoutResize();
-		window.addEventListener('resize', this.onLayoutResize);
-		var menu = this.$router.sc_getMenu();
-		this.menu = this.filterUrl(menu);
-		this.showThis()
-	},
-	setup() {
-		const route = useRoute();
-		const router = useRouter();
-
-		watch(route, () => {
-			showThis();
-		})
-
-		const pmenu = ref({
-			path: '',
-			children: [],
-		});
-		const nextMenu = ref([]);
-		const active = ref('');
-		//路由监听高亮
-		const showThis = () => {
-			pmenu.value = route.meta.breadcrumb ? route.meta.breadcrumb[0] : {}
-			nextMenu.value = filterUrl(pmenu.value.children);
-			nextTick(() => {
-				active.value = route.meta.active || route.fullPath;
-			})
+		//递归循环
+		if (item.children && item.children.length > 0) {
+			item.children = filterUrl(item.children)
 		}
-		const filterUrl = (map) => {
-			const newMap = [];
-			map && map.forEach(item => {
-				item.meta = item.meta ? item.meta : {};
-				//处理隐藏
-				if (item.meta.hidden || item.meta.type == "button") {
-					return false
-				}
-				//处理http
-				if (item.meta.type == 'iframe') {
-					item.path = `/i/${item.name}`;
-				}
-				//递归循环
-				if (item.children && item.children.length > 0) {
-					item.children = filterUrl(item.children)
-				}
-				newMap.push(item)
-			})
-			return newMap;
-		}
+		newMap.push(item)
+	})
+	return newMap;
+}
 
-		const showMenu = (r) => {
-			pmenu.value = r;
-			nextMenu.value = filterUrl(r.children);
-			if ((!r.children || r.children.length == 0) && r.component) {
-				router.push({ path: r.path })
-			}
-		}
-
-
-		const settingDialog = ref(false)
-		const openSetting = () => {
-			settingDialog.value = true;
-		}
-
-		const exitMaximize = () => {
-			document.getElementById('app').classList.remove('main-maximize')
-		}
-		const onLayoutResize = ()=>{
-			this.$store.commit("SET_ismobile", document.body.clientWidth < 992)
-		}
-
-
-
-		
-
-
-
-		const store = useStore()
-
-	
-	},
-	watch: {
-		$route() {
-			this.showThis()
-		},
-		layout: {
-			handler(val) {
-				document.body.setAttribute('data-layout', val)
-			},
-			immediate: true,
-		}
-	},
-	methods: {
-		openSetting() {
-			this.settingDialog = true;
-		},
-		onLayoutResize() {
-			this.$store.commit("SET_ismobile", document.body.clientWidth < 992)
-		},
-		//路由监听高亮
-		showThis() {
-			this.pmenu = this.$route.meta.breadcrumb ? this.$route.meta.breadcrumb[0] : {}
-			this.nextMenu = this.filterUrl(this.pmenu.children);
-			this.$nextTick(() => {
-				this.active = this.$route.meta.active || this.$route.fullPath;
-			})
-		},
-		//点击显示
-		showMenu(route) {
-			this.pmenu = route;
-			this.nextMenu = this.filterUrl(route.children);
-			if ((!route.children || route.children.length == 0) && route.component) {
-				this.$router.push({ path: route.path })
-			}
-		},
-		//转换外部链接的路由
-		filterUrl(map) {
-			var newMap = []
-			map && map.forEach(item => {
-				item.meta = item.meta ? item.meta : {};
-				//处理隐藏
-				if (item.meta.hidden || item.meta.type == "button") {
-					return false
-				}
-				//处理http
-				if (item.meta.type == 'iframe') {
-					item.path = `/i/${item.name}`;
-				}
-				//递归循环
-				if (item.children && item.children.length > 0) {
-					item.children = this.filterUrl(item.children)
-				}
-				newMap.push(item)
-			})
-			return newMap;
-		},
-		//退出最大化
-		exitMaximize() {
-			document.getElementById('app').classList.remove('main-maximize')
-		}
+const showMenu = (r) => {
+	pmenu.value = r;
+	nextMenu.value = filterUrl(r.children);
+	if ((!r.children || r.children.length == 0) && r.component) {
+		router.push({ path: r.path })
 	}
 }
+
+
+const settingDialog = ref(false)
+const openSetting = () => {
+	settingDialog.value = true;
+}
+
+const exitMaximize = () => {
+	document.getElementById('app').classList.remove('main-maximize')
+}
+const onLayoutResize = () => {
+	store.commit("SET_ismobile", document.body.clientWidth < 992)
+}
+
+
+
+
+const store = useStore();
+console.log(store);
+const ismobile = computed(() => {
+
+	return store.state.global.layout
+})
+
+
+const layout = computed(() => {
+	return store.state.global.layout
+})
+
+const layoutTags = computed(() => {
+	return store.state.global.layoutTags;
+})
+
+
+const menuIsCollapse = computed(() => {
+	return store.state.global.menuIsCollapse || true
+})
+
+
+watch(layout, (val) => {
+	document.body.setAttribute('data-layout', val);
+}, { immediate: true });
+
+const menu = ref([]);
+
+onMounted(() => {
+	onLayoutResize();
+	window.addEventListener('resize', onLayoutResize);
+	menu.value = filterUrl(router.sc_getMenu());
+	showThis()
+})
+
+
 </script>
