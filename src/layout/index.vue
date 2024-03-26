@@ -225,7 +225,7 @@ const router = useRouter();
 
 const globalStore = useGlobalStore();
 
-watch(route, () => {
+watch(route.fullPath, () => {
 	showThis();
 })
 
@@ -242,17 +242,14 @@ const active = ref('');
 
 //路由监听高亮
 const showThis = () => {
-	console.log("route", route);
+	const route = useRoute();
+
+	console.log(route);
 	pmenu.value = route.meta.breadcrumb ? route.meta.breadcrumb[0] : {};
-
-
-
-	// router.getRoutes
-	// console.log(pmenu);
-	// nextMenu.value = filterUrl(pmenu.value.children);
-	// nextTick(() => {
-	// 	active.value = route.meta.active || route.fullPath;
-	// })
+	nextMenu.value = filterUrl(pmenu.value.children);
+	nextTick(() => {
+		active.value = route.meta.active || route.fullPath;
+	})
 }
 
 
