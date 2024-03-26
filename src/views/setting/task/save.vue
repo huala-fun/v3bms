@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 系统计划任务配置
- * @version: 1.2
- * @Author: sakuya
- * @Date: 2021年7月7日09:28:32
- * @LastEditors: sakuya
- * @LastEditTime: 2021年7月10日20:56:47
--->
-
 <template>
 	<el-dialog :title="titleMap[mode]" v-model="visible" :width="400" destroy-on-close @closed="$emit('closed')">
 		<el-form :model="form" :rules="rules" ref="dialogForm" label-width="100px" label-position="left">

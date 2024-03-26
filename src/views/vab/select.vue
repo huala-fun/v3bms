@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 字典选择器组件演示
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年8月3日15:51:20
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-main>
 		<el-alert title="封装el-select支持异步获取数据,以及根据字典名获取数据,继承el-select全部的属性和事件" type="success" style="margin-bottom:20px;"></el-alert>

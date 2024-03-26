@@ -40,7 +40,7 @@
 	import { defineAsyncComponent } from 'vue'
 
 	export default {
-		name: 'userCenter',
+		name: 'account1',
 		components: {
 			account: defineAsyncComponent(() => import('./components/account')),
 			seting: defineAsyncComponent(() => import('./components/seting')),
@@ -105,7 +105,7 @@
 					}
 				],
 				user: {
-					userName: "Sakuya",
+					userName: "huala-fun",
 					role: "超级管理员",
 				},
 				page: "account"

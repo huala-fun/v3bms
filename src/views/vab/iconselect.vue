@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 图标选择器组件演示文件
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年7月27日09:33:06
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-main>
 		<el-alert title="支持扩展的图标选择器,除了默认的图标组还可以在 @/config/iconSelect 中定义更多的图标组" type="success" style="margin-bottom:20px;"></el-alert>

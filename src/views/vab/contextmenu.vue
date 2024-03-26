@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 右键简单组件演示文件
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年7月22日16:31:14
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-main>
 		<el-row :gutter="15">
@@ -69,7 +60,7 @@
 				tableData: [
 					{
 						id: '1',
-						name: 'Sakuya',
+						name: 'huala-fun',
 						date: '2021-10-10',
 						state: 1
 					},

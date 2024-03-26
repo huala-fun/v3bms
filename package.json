@@ -19,6 +19,8 @@
     "echarts": "5.4.1",
     "element-plus": "2.2.32",
     "nprogress": "0.2.0",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "qrcodejs2": "0.0.2",
     "qrcodejs2-fix": "^0.0.1",
     "sortablejs": "1.15.0",

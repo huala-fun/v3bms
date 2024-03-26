@@ -33,7 +33,7 @@
 			return {
 				form: {
 					user: "administrator@V3BMSadmin.com",
-					name: "Sakuya",
+					name: "huala-fun",
 					sex: "0",
 					about: "正所谓富贵险中求"
 				}

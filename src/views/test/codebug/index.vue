@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 模拟触发错误
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年6月25日08:53:13
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-main>
 		<el-alert title="通过VUE开放的errorHandler可以很方便的捕捉到处理异常, V3BMS收集后可上报日志收集系统, 相关代码:@/utils/errorHandler.js" type="success" style="margin-bottom:20px;"></el-alert>

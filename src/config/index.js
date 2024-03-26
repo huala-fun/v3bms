@@ -45,6 +45,8 @@ const DEFAULT_CONFIG = {
 	//语言
 	LANG: 'zh-cn',
 
+	// 黑夜模式
+	DARK: false,
 	//主题颜色
 	COLOR: '',
 

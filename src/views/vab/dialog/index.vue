@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: scDialog 弹窗扩展演示文件
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年8月27日08:56:30
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-main>
 		<el-alert title="二次封装el-dialog,加入加载中/最大化." type="success" style="margin:0 0 20px 0;"></el-alert>

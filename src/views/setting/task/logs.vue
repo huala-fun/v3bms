@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 系统计划任务配置
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年7月7日09:28:32
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-container>
 		<el-main  style="padding:0 20px;">

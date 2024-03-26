@@ -1,10 +1,3 @@
-/*
- * @Descripttion: 工具集
- * @version: 1.2
- * @LastEditors: sakuya
- * @LastEditTime: 2022年5月24日00:28:56
- */
-
 import CryptoJS from 'crypto-js';
 import sysConfig from "@/config";
 

@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 统计数值组件演示
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年6月23日10:28:17
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-main>
 		<el-alert title="一个非常简单的组件, 目的就是省去重复写样式, 支持千分符/前后缀等." type="success" style="margin-bottom:20px;"></el-alert>
