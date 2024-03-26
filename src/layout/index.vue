@@ -238,14 +238,25 @@ const pmenu = ref({
 });
 const nextMenu = ref([]);
 const active = ref('');
+
+
 //路由监听高亮
 const showThis = () => {
-	pmenu.value = route.meta.breadcrumb ? route.meta.breadcrumb[0] : {}
-	nextMenu.value = filterUrl(pmenu.value.children);
-	nextTick(() => {
-		active.value = route.meta.active || route.fullPath;
-	})
+	console.log("route", route);
+	pmenu.value = route.meta.breadcrumb ? route.meta.breadcrumb[0] : {};
+
+
+
+	// router.getRoutes
+	// console.log(pmenu);
+	// nextMenu.value = filterUrl(pmenu.value.children);
+	// nextTick(() => {
+	// 	active.value = route.meta.active || route.fullPath;
+	// })
 }
+
+
+
 const filterUrl = (map) => {
 	const newMap = [];
 	map && map.forEach(item => {
@@ -318,7 +329,10 @@ const menu = ref([]);
 onMounted(() => {
 	onLayoutResize();
 	window.addEventListener('resize', onLayoutResize);
-	menu.value = filterUrl(router.sc_getMenu());
+	const menus = router.sc_getMenu();
+	menu.value = filterUrl(menus);
+
+	console.log(menu);
 	showThis()
 })
 
