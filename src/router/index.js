@@ -24,7 +24,6 @@ const routes_404 = {
 }
 
 
-
 let routes_404_r = () => { }
 
 // 路由实例
@@ -43,7 +42,6 @@ router.beforeEach(async (to, from, next) => {
 	NProgress.start()
 	//动态标题
 	document.title = to.meta.title ? `${to.meta.title} - ${config.APP_NAME}` : `${config.APP_NAME}`
-
 	const token = tool.cookie.get("TOKEN");
 	if (to.path === "/login") {
 		//删除路由(替换当前 layout 路由)
@@ -60,7 +58,6 @@ router.beforeEach(async (to, from, next) => {
 		return false;
 	}
 
-	
 
 	if (!token) {
 		next({
@@ -73,7 +70,6 @@ router.beforeEach(async (to, from, next) => {
 	if (to.meta.fullpage) {
 		to.matched = [to.matched[to.matched.length - 1]]
 	}
-
 
 	//加载动态/静态路由
 	if (!isGetRouter) {

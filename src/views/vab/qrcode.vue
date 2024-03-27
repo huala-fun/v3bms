@@ -3,17 +3,17 @@
 		<el-row :gutter="15">
 			<el-col :lg="8">
 				<el-card shadow="never" header="常用">
-					<sc-qr-code text="V3BMS"></sc-qr-code>
+					<sc-qr-code text="HUALA"></sc-qr-code>
 				</el-card>
 			</el-col>
 			<el-col :lg="8">
 				<el-card shadow="never" header="带Logo">
-					<sc-qr-code text="V3BMS" logo="/img/logo.png"></sc-qr-code>
+					<sc-qr-code text="HUALA" logo="/img/logo.png"></sc-qr-code>
 				</el-card>
 			</el-col>
 			<el-col :lg="8">
 				<el-card shadow="never" header="自定义颜色大小">
-					<sc-qr-code text="V3BMS" :size="100" colorDark="#088200" colorLight="#fff"></sc-qr-code>
+					<sc-qr-code text="HUALA" :size="100" colorDark="#088200" colorLight="#fff"></sc-qr-code>
 				</el-card>
 			</el-col>
 			<el-col :lg="8">
@@ -31,7 +31,7 @@
 		name: 'qrcode',
 		data() {
 			return {
-				qrcode: "V3BMS"
+				qrcode: "HUALA"
 			}
 		},
 		mounted() {

@@ -20,7 +20,7 @@ export default (error, vm)=>{
 	}
 	var errorName = errorMap[error.name] || "未知错误"
 
-	console.warn(`[V3BMS error]: ${error}`);
+	console.warn(`[HUALA error]: ${error}`);
 	console.error(error);
 	//throw error;
 

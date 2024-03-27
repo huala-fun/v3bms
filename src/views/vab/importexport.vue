@@ -3,8 +3,8 @@
 		<el-row :gutter="15">
 			<el-col :lg="12">
 				<el-card shadow="never" header="导入(使用mock,有50%几率导入失败)">
-					<sc-file-import :apiObj="$API.common.importFile" templateUrl="http://www.V3BMSadmin/file.xlsx" @success="success"></sc-file-import>
-					<sc-file-import :apiObj="$API.common.importFile" :data="{otherData:'demo'}" templateUrl="http://www.V3BMSadmin/file.xlsx" accept=".xls, .xlsx" :maxSize="30" tip="请上传小于或等于 30M 的 .xls, .xlsx 格式文件(自定义TIP)" @success="success">
+					<sc-file-import :apiObj="$API.common.importFile" templateUrl="http://www.HUALAadmin/file.xlsx" @success="success"></sc-file-import>
+					<sc-file-import :apiObj="$API.common.importFile" :data="{otherData:'demo'}" templateUrl="http://www.HUALAadmin/file.xlsx" accept=".xls, .xlsx" :maxSize="30" tip="请上传小于或等于 30M 的 .xls, .xlsx 格式文件(自定义TIP)" @success="success">
 						<template #default="{open}">
 							<el-button type="primary" icon="sc-icon-upload" @click="open">导入(全配置)</el-button>
 						</template>

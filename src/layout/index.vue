@@ -56,47 +56,7 @@
 	</template>
 
 	<!-- 经典布局 -->
-	<template v-else-if="layout == 'menu'">
-		<header class="adminui-header">
-			<div class="adminui-header-left">
-				<div class="logo-bar">
-					<img class="logo" src="/img/logo.png">
-					<span>{{ $CONFIG.APP_NAME }}</span>
-				</div>
-			</div>
-			<div class="adminui-header-right">
-				<userbar></userbar>
-			</div>
-		</header>
-		<section class="aminui-wrapper">
-			<div v-if="!ismobile" :class="menuIsCollapse ? 'aminui-side isCollapse' : 'aminui-side'">
-				<div class="adminui-side-scroll">
-					<el-scrollbar>
-						<el-menu :default-active="active" router :collapse="menuIsCollapse"
-							:unique-opened="$CONFIG.MENU_UNIQUE_OPENED">
-							<NavMenu :navMenus="menu"></NavMenu>
-						</el-menu>
-					</el-scrollbar>
-				</div>
-				<div class="adminui-side-bottom" @click="store.commit('TOGGLE_menuIsCollapse')">
-					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
-				</div>
-			</div>
-			<Side-m v-if="ismobile"></Side-m>
-			<div class="aminui-body el-container">
-				<Topbar v-if="!ismobile"></Topbar>
-				<Tags v-if="!ismobile && layoutTags"></Tags>
-				<div class="adminui-main" id="adminui-main">
-					<router-view v-slot="{ Component }">
-						<keep-alive :include="store.state.keepAlive.keepLiveRoute">
-							<component :is="Component" :key="route.fullPath" v-if="store.state.keepAlive.routeShow" />
-						</keep-alive>
-					</router-view>
-					<iframe-view></iframe-view>
-				</div>
-			</div>
-		</section>
-	</template>
+	<classicsLayout v-else-if="layout == 'menu'" />
 
 	<!-- 功能坞布局 -->
 	<template v-else-if="layout == 'dock'">
@@ -134,62 +94,7 @@
 	</template>
 
 	<!-- 默认布局 -->
-	<template v-else>
-		<section class="aminui-wrapper">
-			<div v-if="!ismobile" class="aminui-side-split">
-				<div class="aminui-side-split-top">
-					<router-link :to="$CONFIG.DASHBOARD_URL">
-						<img class="logo" :title="$CONFIG.APP_NAME" src="/img/logo-r.png">
-					</router-link>
-				</div>
-				<div class="adminui-side-split-scroll">
-					<el-scrollbar>
-						<ul>
-							<li v-for="item in menu" :key="item" :class="pmenu.path == item.path ? 'active' : ''"
-								@click="showMenu(item)">
-								<el-icon>
-									<component :is="item.meta.icon || el-icon-menu" />
-								</el-icon>
-								<p>{{ item.meta.title }}</p>
-							</li>
-						</ul>
-					</el-scrollbar>
-				</div>
-			</div>
-			<div v-if="!ismobile && nextMenu.length > 0 || !pmenu.component"
-				:class="menuIsCollapse ? 'aminui-side isCollapse' : 'aminui-side'">
-				<div v-if="!menuIsCollapse" class="adminui-side-top">
-					<h2>{{ pmenu.meta.title }}</h2>
-				</div>
-				<div class="adminui-side-scroll">
-					<el-scrollbar>
-						<el-menu :default-active="active" router :collapse="menuIsCollapse"
-							:unique-opened="$CONFIG.MENU_UNIQUE_OPENED">
-							<NavMenu :navMenus="nextMenu"></NavMenu>
-						</el-menu>
-					</el-scrollbar>
-				</div>
-				<div class="adminui-side-bottom" @click="store.commit('TOGGLE_menuIsCollapse')">
-					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
-				</div>
-			</div>
-			<Side-m v-if="ismobile"></Side-m>
-			<div class="aminui-body el-container">
-				<Topbar>
-					<userbar></userbar>
-				</Topbar>
-				<Tags v-if="!ismobile && layoutTags"></Tags>
-				<div class="adminui-main" id="adminui-main">
-					<router-view v-slot="{ Component }">
-						<keep-alive :include="store.state.keepAlive.keepLiveRoute">
-							<component :is="Component" :key="route.fullPath" v-if="store.state.keepAlive.routeShow" />
-						</keep-alive>
-					</router-view>
-					<iframe-view></iframe-view>
-				</div>
-			</div>
-		</section>
-	</template>
+	<defaultLayout v-else />
 
 	<div class="main-maximize-exit" @click="exitMaximize"><el-icon><el-icon-close /></el-icon></div>
 
@@ -203,6 +108,8 @@
 </template>
 
 <script setup>
+import defaultLayout from "./components/defaultLayout.vue"
+import classicsLayout from "./components/classicsLayout.vue"
 import SideM from './components/sideM.vue';
 import Topbar from './components/topbar.vue';
 import Tags from './components/tags.vue';
@@ -243,8 +150,6 @@ const active = ref('');
 //路由监听高亮
 const showThis = () => {
 	const route = useRoute();
-
-	console.log(route);
 	pmenu.value = route.meta.breadcrumb ? route.meta.breadcrumb[0] : {};
 	nextMenu.value = filterUrl(pmenu.value.children);
 	nextTick(() => {
