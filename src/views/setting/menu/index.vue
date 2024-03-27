@@ -103,7 +103,7 @@
 					}
 				}
 				this.menuloading = true
-				var res = await this.$API.demo.post.post(newMenuData)
+				var res = await this.$API.menu.add(newMenuData)
 				this.menuloading = false
 				newMenuData.id = res.data
 
@@ -133,7 +133,7 @@
 				var reqData = {
 					ids: CheckedNodes.map(item => item.id)
 				}
-				var res = await this.$API.demo.post.post(reqData)
+				var res = await this.$API.menu.batchDelete(reqData)
 				this.menuloading = false
 
 				if(res.code == 200){
